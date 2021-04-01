@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Funcionario;
+import com.example.demo.model.PontoEletronico;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,6 +11,9 @@ import java.util.Map;
 
 @Service
 public class FuncionarioService {
+
+    @Autowired
+    PontoEletronicoService service;
 
     private List<Funcionario> funcionarios = new ArrayList<>();
     public List<Funcionario> getFuncionarios() {
@@ -20,8 +25,6 @@ public class FuncionarioService {
         funcionario.setId(seqFunc());
         funcionario.setNome((String) json.get("nome"));
         funcionario.setRh((Boolean) json.get("RH"));
-        funcionario.setAtrasos(0);
-        funcionario.setBloqueado(false);
         this.funcionarios.add(funcionario);
         return "Funcionario cadastrado";
 
@@ -34,7 +37,7 @@ public class FuncionarioService {
         return seqF ++;
     }
 
-    public Funcionario mostraFun(Integer id) {
+   public Funcionario mostraFun(Integer id) {
         return this.funcionarios.get(id);
     }
 

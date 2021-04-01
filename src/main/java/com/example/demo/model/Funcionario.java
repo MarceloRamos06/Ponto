@@ -6,8 +6,8 @@ import java.util.List;
 public class Funcionario {
     private int id;
     private String nome;
-    private Integer atrasos;
-    private Boolean bloqueado;
+    private Integer atrasos =0;
+    private Boolean bloqueado = false;
     private Boolean rh;
 
 

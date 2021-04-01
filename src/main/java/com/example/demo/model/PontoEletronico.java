@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 
-public class PontoEletronico extends Funcionario {
+public class PontoEletronico {
 
     private Funcionario funcionario;
     private LocalTime horario;

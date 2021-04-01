@@ -16,8 +16,6 @@ import java.util.Map;
 @Service
 public class PontoEletronicoService {
 
-
-
     @Autowired
     FuncionarioService service;
 
@@ -29,7 +27,7 @@ public class PontoEletronicoService {
     public String registraPonto(Map<String, String> json) {
         Funcionario funcionario = this.service.mostraFun(Integer.parseInt(json.get("ponto")));
         PontoEletronico ponto = new PontoEletronico();
-        boqueio(funcionario);
+        bloqueio(funcionario);
         atraso(funcionario);
         if (funcionario.getBloqueado()) {
             return "Acesso Bloqueado, consulte o RH para o desbloqueio";
@@ -37,12 +35,12 @@ public class PontoEletronicoService {
             ponto.setFuncionario(funcionario);
             ponto.setData(LocalDate.now());
             ponto.setHorario(LocalTime.now());
-           this.pontoEletronico.add(ponto);
+            this.pontoEletronico.add(ponto);
         }
             return "Ponto Registrado";
         }
 
-    public void boqueio(Funcionario funcionario) {
+    public void bloqueio(Funcionario funcionario) {
         if(funcionario.getAtrasos() >= 2) {
             funcionario.setBloqueado(true);
         }
@@ -51,7 +49,7 @@ public class PontoEletronicoService {
     public Object mostraPonto(Integer id) {
         Funcionario funcionario = this.service.mostraFun(id);
         if(funcionario.getRh()) {
-            return this.pontoEletronico;
+            return this.getPontoEletronico();
         } else {
             return "Acesso Negado";
         }
@@ -64,6 +62,7 @@ public class PontoEletronicoService {
             funcionario.setAtrasos(funcionario.getAtrasos() + 1);
         }
     }
+
 
 }
 
