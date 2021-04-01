@@ -20,7 +20,7 @@ public class FuncionarioService {
         funcionario.setId(seqFunc());
         funcionario.setNome((String) json.get("nome"));
         funcionario.setRh((Boolean) json.get("RH"));
-        funcionario.setAtrasos(5);
+        funcionario.setAtrasos(0);
         funcionario.setBloqueado(false);
         this.funcionarios.add(funcionario);
         return "Funcionario cadastrado";

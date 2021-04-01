@@ -25,12 +25,4 @@ public class FuncionarioController {
         return this.service.getFuncionarios();
     }
 
-    @GetMapping("/funcionarios/{id}")
-    public List<PontoEletronico> buscaFuncionario(@PathVariable Integer id) {
-        return (List<PontoEletronico>) this.service.mostraFun(id);
-    }
-
-
-
-
 }

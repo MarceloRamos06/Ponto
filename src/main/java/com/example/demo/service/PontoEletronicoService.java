@@ -5,13 +5,18 @@ import com.example.demo.model.PontoEletronico;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class PontoEletronicoService {
+
+
 
     @Autowired
     FuncionarioService service;
@@ -21,11 +26,11 @@ public class PontoEletronicoService {
         return this.pontoEletronico;
     }
 
-
-    public String registraPonto(Integer id) {
-        Funcionario funcionario = this.service.mostraFun(id);
+    public String registraPonto(Map<String, String> json) {
+        Funcionario funcionario = this.service.mostraFun(Integer.parseInt(json.get("ponto")));
         PontoEletronico ponto = new PontoEletronico();
         boqueio(funcionario);
+        atraso(funcionario);
         if (funcionario.getBloqueado()) {
             return "Acesso Bloqueado, consulte o RH para o desbloqueio";
         } else {
@@ -34,7 +39,6 @@ public class PontoEletronicoService {
             ponto.setHorario(LocalTime.now());
            this.pontoEletronico.add(ponto);
         }
-
             return "Ponto Registrado";
         }
 
@@ -53,8 +57,20 @@ public class PontoEletronicoService {
         }
     }
 
+    public void atraso(Funcionario funcionario){
+        LocalTime entrada = LocalTime.of(8,0,5);
+        LocalTime chegada = LocalTime.now();
+        if(chegada.isAfter(entrada)) {
+            funcionario.setAtrasos(funcionario.getAtrasos() + 1);
+        }
+    }
 
 }
+
+
+
+
+
 
 
 

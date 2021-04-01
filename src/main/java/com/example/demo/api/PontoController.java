@@ -3,10 +3,10 @@ package com.example.demo.api;
 import com.example.demo.model.PontoEletronico;
 import com.example.demo.service.PontoEletronicoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.text.ParseException;
+import java.util.Map;
 
 
 @RestController
@@ -14,16 +14,11 @@ public class PontoController {
     @Autowired
     PontoEletronicoService service;
 
-    @PostMapping("/ponto/funcionarios/{id}")
-    public String registraPonto(@PathVariable Integer id) {
-        return this.service.registraPonto(id);
+    @PostMapping("/ponto/funcionarios")
+    public String registraPonto(@RequestBody Map<String, String> json) throws ParseException {
+        return this.service.registraPonto(json);
 
     }
-
-    //@GetMapping("/ponto/funcionarios")
-    //public List<PontoEletronico> mostraPonto() {
-        //return this.service.getPontoEletronico();
-   // }
 
     @GetMapping("/ponto/{id}")
     public Object mostraPonto(@PathVariable Integer id) {
@@ -31,3 +26,4 @@ public class PontoController {
     }
 
 }
+

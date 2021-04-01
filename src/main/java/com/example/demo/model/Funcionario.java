@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Funcionario {
     private int id;
@@ -45,7 +46,6 @@ public class Funcionario {
     public Boolean getRh() { return rh; }
 
     public void setRh(Boolean rh) { this.rh = rh; }
-
 
 
     }
