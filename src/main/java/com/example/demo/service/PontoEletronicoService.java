@@ -63,6 +63,22 @@ public class PontoEletronicoService {
         }
     }
 
+    public String desbloqueia(Map< String, String> json) {
+        Funcionario funcionariorh = this.service.mostraFun(Integer.parseInt(json.get("RH")));
+        Funcionario funcionario = this.service.mostraFun(Integer.parseInt(json.get("funcionario")));
+        if(funcionariorh.getRh()) {
+            if(funcionario.getBloqueado()){
+                funcionario.setBloqueado(false);
+                this.service.getFuncionarios().add(funcionario);
+                return "Funcionario desbloqueado";
+            } else {
+                return"Funcionario não esta bloqueado";
+            }
+        } else {
+            return "Você não tem permissao";
+        }
+    }
+
 
 }
 

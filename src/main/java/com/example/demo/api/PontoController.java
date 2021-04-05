@@ -25,5 +25,10 @@ public class PontoController {
         return this.service.mostraPonto(id);
     }
 
+    @PostMapping("/ponto/desbloqueio")
+    public String desbloqueia(@RequestBody Map<String, String> json) throws ParseException {
+        return this.service.desbloqueia(json);
+    }
+
 }
 
